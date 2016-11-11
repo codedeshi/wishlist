@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>    
+    <div id="wrap">
+        <div id="header">
+          <h2 class="inline">Create a New Wish List Item</h2>
+		  <a href="/dashboard">Home</a>
+		  <a href="/">Logout</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{message}}</p>
+            {% endfor %}
+          {% endif %}
+    {% endwith %}
+    <div id="mid">
+        <div id="registration" class="box">          
+			<form action="/additem" method="POST">            
+				<label>Item/Product: <input type="text" name="name"></label>
+				<label><input class="green" type="submit" name="submit" value="Add"></label>
+			</form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

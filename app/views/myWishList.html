@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Welcome </title>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  </head>
+  <body>    
+    <div id="wrap">
+        <div id="header">
+          <h2 class="inline">Welcome</h2>
+		  <a href="/">Logout</a>          
+        </div>
+    <div id="mid">
+		<div id="mywish">
+			<h3>Your Wish List</h3>
+			<table class='table'>
+				<tr>
+					<th>Item</th>
+					<th>Added by</th>
+					<th>Date added</th>
+					<th>Action</th>
+				</tr>
+				{%for item in wishlist%}
+				<tr>
+					<td><a href="/wish_item/{{item['id']}}">{{item['name']}}</a></td> 
+					<td>{{item['uname']}}</td>
+					<td>{{item['created_at']}}</td>
+					<td>
+						{%if item['added']== user_id:%}
+						<a href="/delete/{{item['id']}}">Delete</a></td>
+						{%else:%}
+						<a href="/remove/{{item['id']}}">Remove from mylist</a></td>
+						{%endif%}
+				</tr>
+				{%endfor%}
+			</table>
+
+			<h3>Other Users Wish List</h3>
+			<table class='table'>
+				<tr>
+					<th>Item</th>
+					<th>Added by</th>
+					<th>Date added</th>
+					<th>Action</th>
+				</tr>
+				{%for item in itemlist%}
+				<tr>
+					<td><a href="/wish_item/{{item['id']}}">{{item['name']}}</a></td> 
+					<td>{{item['added']}}</td>
+					<td>{{item['created_at']}}</td>
+					<td><a href="/add/{{user_id}}/{{item['id']}}">Add to my wishlist!</a></td>
+				</tr>
+				{%endfor%}
+			</table>
+		</div>
+		<span id ='addItem'><a href="/wish_items/create">Add item</a></span>
+	</div>
+    </div>
+    </div>
+  </body>
+</html>
