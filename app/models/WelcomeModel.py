@@ -5,6 +5,7 @@ class WelcomeModel(Model):
         super(WelcomeModel, self).__init__()
 
     def register(self, data):
+        print 'here'
         error = []
 
         if len(data['name']) < 3:
@@ -20,7 +21,7 @@ class WelcomeModel(Model):
             return {'status': False , 'error': error}
         else:
             try:
-                query = "INSERT into users (name, uname,password,date_hired) values (:name, :uname, :password, :date_hired)"
+                query = "INSERT into users (name, uname,password) values (:name, :uname, :password)"
                 data['password'] = self.bcrypt.generate_password_hash(data['password'])
                 user_id = self.db.query_db(query, data)        
                 return {'status': True, "user_id": user_id}
